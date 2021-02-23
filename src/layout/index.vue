@@ -5,10 +5,10 @@
     <router-view />
   </main>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
-import Headers from "./Header";
-import SideBar from "./SideBar";
+import Headers from "./Header/index.vue";
+import SideBar from "./SideBar/index.vue";
 
 export default defineComponent({
   components: {

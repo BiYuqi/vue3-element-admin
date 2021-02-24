@@ -7,13 +7,6 @@ module.exports = {
   assetsDir: "static",
   lintOnSave: process.env.NODE_ENV === "development",
   productionSourceMap: false,
-  devServer: {
-    open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
-  },
   configureWebpack: {
     resolve: {
       alias: {
@@ -52,5 +45,41 @@ module.exports = {
         symbolId: "icon-[name]"
       })
       .end();
+
+    // 生产环境各个库单独抽离 避免重复打包
+    config.when(process.env.NODE_ENV !== "development", config => {
+      config.optimization.splitChunks({
+        chunks: "all",
+        minSize: 50000,
+        cacheGroups: {
+          libs: {
+            name: "chunk-libs",
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: "initial"
+          },
+          elementUI: {
+            name: "chunk-element-plus",
+            priority: 30,
+            test: /[\\/]node_modules[\\/]_?element-plus(.*)/
+          },
+          ons: {
+            name: "chunk-commons",
+            test: resolve("src/views"),
+            minChunks: 3,
+            priority: 5,
+            reuseExistingChunk: true
+          }
+        }
+      });
+      config.optimization.runtimeChunk("single");
+    });
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "~@/styles/variables.scss";`
+      }
+    }
   }
 };

@@ -37,7 +37,7 @@
         <el-button
           :disabled="loading"
           v-loading="loading"
-          element-loading-background="transparent"
+          element-loading-background="rgba(0, 0, 0, 0)"
           type="primary"
           @click="handleSubmit"
         >

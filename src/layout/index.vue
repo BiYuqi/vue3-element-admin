@@ -1,9 +1,13 @@
 <template>
-  <headers />
-  <main>
+  <div class="app-container">
     <side-bar />
-    <router-view />
-  </main>
+    <main>
+      <headers />
+      <div class="app-content">
+        <router-view />
+      </div>
+    </main>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -17,3 +21,23 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.app-container {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}
+
+.app-content {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  padding: 15px;
+  position: relative;
+  overflow: hidden;
+}
+</style>

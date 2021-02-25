@@ -1,0 +1,66 @@
+$itemColor: #454545;
+
+.app-login {
+  background-color: $darkBg;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  &-wrap {
+    position: relative;
+    width: 520px;
+    padding: 25vh 35px 0 35px;
+    max-width: 100%;
+    margin: 0 auto;
+    color: #eee;
+
+    :deep(.el-input input) {
+      background-color: transparent;
+      border-color: transparent;
+      padding: 4px 0 4px 0;
+      height: 50px;
+      color: #eeeeee;
+    }
+
+    :deep(.el-form-item) {
+      border: 1px solid hsla(0, 0%, 100%, 0.1);
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      color: $itemColor;
+      margin-bottom: 26px;
+    }
+    /* ignore red border when got valid error */
+    :deep(.el-form-item.is-error input:focus) {
+      border-color: transparent;
+    }
+
+    :deep(.el-input-group__prepend),
+    :deep(.el-input-group__append) {
+      background-color: transparent;
+      border-color: transparent;
+      svg {
+        color: #eee;
+      }
+    }
+    :deep(.el-input-group__append) {
+      cursor: pointer;
+    }
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  &__submit {
+    &.el-form-item {
+      width: 100%;
+      border: none;
+      text-align: center;
+      background-color: transparent;
+    }
+
+    .el-button {
+      width: 100%;
+    }
+  }
+}

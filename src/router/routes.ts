@@ -5,9 +5,15 @@ export const baseRoutes: RouteRecordRaw[] = [
   {
     path: "/login",
     name: "login",
+    props: true,
     component: () => import("@/views/login/index.vue")
   }
 ];
+
+export const notFoundPage: RouteRecordRaw = {
+  path: "/:pathMatch(.*)",
+  component: () => import("@/views/404/index.vue")
+};
 
 export const sideBarRoutes: RouteRecordRaw[] = [
   {

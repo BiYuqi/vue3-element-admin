@@ -7,11 +7,11 @@ import store from "./store";
 import ElementPlus from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
 
-// import custom component
-import VComponents from "./components/index";
-
-// import svg icon
+/** Load svg icon */
 import "@/icons/index";
+
+/** Load custom component */
+import VComponents from "./components/index";
 
 createApp(App)
   .use(store)

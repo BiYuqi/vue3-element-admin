@@ -1,4 +1,4 @@
-import type { App } from "vue";
+import { App } from "vue";
 import SvgIcon from "./index.vue";
 
 SvgIcon.install = (app: App): void => {

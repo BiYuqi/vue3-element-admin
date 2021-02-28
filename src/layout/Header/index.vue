@@ -3,6 +3,7 @@
     <div class="header-toggle">
       <svg-icon :icon-class="icon" @click="handleToggle" />
       <breadcrumb />
+      <user-profile />
     </div>
   </div>
 </template>
@@ -10,8 +11,12 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
+import UserProfile from "../UserProfile/index.vue";
 
 export default defineComponent({
+  components: {
+    UserProfile
+  },
   setup() {
     const store = useStore();
     const icon = computed(() =>

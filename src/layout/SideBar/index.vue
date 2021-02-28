@@ -79,7 +79,8 @@ export default defineComponent({
     color: $darkTextColor !important;
   }
 
-  .router-link-exact-active .el-menu-item {
+  // Not exact match
+  .router-link-active .el-menu-item {
     color: $darkActiveColor !important;
   }
   // text margin

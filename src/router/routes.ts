@@ -45,6 +45,7 @@ export const sideBarRoutes: RouteRecordRaw[] = [
     path: "/nested",
     name: "nested",
     component: Layout,
+    redirect: "/nested/menu1",
     meta: { title: "Nested", icon: "nested" },
     children: [
       {
@@ -56,6 +57,7 @@ export const sideBarRoutes: RouteRecordRaw[] = [
       {
         path: "menu2",
         name: "menu2",
+        redirect: "/nested/menu2/menu2-1",
         component: () => import("@/views/nested/menu2/index.vue"),
         meta: { title: "Menu2" },
         children: [
@@ -65,6 +67,8 @@ export const sideBarRoutes: RouteRecordRaw[] = [
             component: () => import("@/views/nested/menu2/menu2-1/index.vue"),
             meta: {
               title: "Menu2-1"
+              // When hidden is set to true, the sidebar will not be displayed
+              // hidden: true
             }
           },
           {

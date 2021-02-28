@@ -1,7 +1,8 @@
 <template>
   <div class="header-container">
-    <div class="header-toggle" @click="handleToggle">
-      <svg-icon :icon-class="icon" />
+    <div class="header-toggle">
+      <svg-icon :icon-class="icon" @click="handleToggle" />
+      <breadcrumb />
     </div>
   </div>
 </template>
@@ -38,5 +39,11 @@ export default defineComponent({
 .header-toggle {
   cursor: pointer;
   padding: 10px;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 20px;
+  }
 }
 </style>

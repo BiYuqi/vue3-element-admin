@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!isHidden(item)">
     <template v-if="!isNested(item)">
       <router-link :to="handleResolvePath(item)" class="sidebar-link">
         <el-menu-item
@@ -64,6 +64,10 @@ export default defineComponent({
       return !!item?.children;
     };
 
+    const isHidden = (item: RouteRecordRaw) => {
+      return item.meta && item.meta?.hidden;
+    };
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hasIcon = (item: RouteRecordRaw) => {
       return (
@@ -89,7 +93,6 @@ export default defineComponent({
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleResolvePath = (item: any) => {
-      // TODO hack
       if (onlyOneRoute(item)) {
         const isIndex = item.children[0].path === "index";
         return isIndex
@@ -111,6 +114,7 @@ export default defineComponent({
 
     return {
       isNested,
+      isHidden,
       hasIcon,
       pickDisplayData,
       handleResolvePath,

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import { baseRoutes, sideBarRoutes, notFoundPage } from "@/router/routes";
 import { usePermission } from "@/router/permission";
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   ...baseRoutes,
   ...sideBarRoutes,
   notFoundPage

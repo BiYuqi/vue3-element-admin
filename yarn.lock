@@ -864,6 +864,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.12.5":
+  version "7.13.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.8.tgz#cc886a85c072df1de23670dc1aa59fc116c4017c"
+  integrity sha512-CwQljpw6qSayc0fRG1soxHAKs1CnQMOChm4mlQP6My0kf9upVGizj/KhlTTgyUnETmHpcUXjaluNAkteRFuafg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.0.0", "@babel/template@^7.12.13", "@babel/template@^7.4.0":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.12.13.tgz#530265be8a2589dbb37523844c5bcb55947fb327"
@@ -961,10 +968,12 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ifake/tree-path@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@ifake/tree-path/-/tree-path-0.0.7.tgz#6b0f0e3fca460bad33a723d78065f3f3c9c6c960"
-  integrity sha512-WtS7UGsMkEhaWLB80rLt1IDQwCbDQee2WepY6sPkS/mt5NmuCmR8Rw3UkjowNRtr/vxRHD/iYbovzwChmnChkQ==
+"@ifake/tree-path@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@ifake/tree-path/-/tree-path-0.1.0.tgz#ce42caeee50e6b41116664b48fc75223c1892904"
+  integrity sha512-9SWcr30a/KlgIn4FHCuxEZq30+/L2CS+3AEusSZ5SxvU8MaZHxnTldI+DzbNuejARSBpuSj61kUul2ugzQnmOQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@intervolga/optimize-cssnano-plugin@^1.0.5":
   version "1.0.6"

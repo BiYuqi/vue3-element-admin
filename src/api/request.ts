@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import { getToken, removeToken } from "@/utils/auth";
 
 const request: AxiosInstance = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 120000,
+  baseURL: process.env.VUE_APP_BASE_API,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json; charset=UTF-8"
   }

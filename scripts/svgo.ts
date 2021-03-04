@@ -4,7 +4,6 @@ import shelljs from "shelljs";
 import inquirer from "inquirer";
 
 const spaceRule = /\s/;
-const execPath = /src.*/;
 const fileNameRule = /([^/]+)\.svg$/;
 const BASE_SVG_PATH = path.resolve(__dirname, "../src/icons/svg");
 
@@ -18,10 +17,11 @@ function ask(): Promise<ReturnAsk> {
       .prompt([
         {
           name: "svgList",
-          message: "请输入需要优化的svg文件名称, 多个文件用空格隔开:",
+          message:
+            "Please enter the name of the SVG file you want to optimize, separated by Spaces:",
           validate: name => {
             if (!name) {
-              return "请输入文件名!";
+              return "Please enter file name!";
             }
             return true;
           }
@@ -40,18 +40,18 @@ async function optimizeSvg() {
 
   entryFilePaths.forEach(filePath => {
     const filename = (filePath.match(fileNameRule) as RegExpMatchArray)[1];
-
     if (files.includes(filename)) {
       try {
-        const execCommand = (filePath.match(execPath) as RegExpMatchArray)[0];
-        shelljs.exec(`svgo ${execCommand} --config=src/icons/svgo.yml`);
-        console.log(`成功优化了${filename}.svg文件`);
+        shelljs.exec(`svgo ${filePath}`);
+        console.log(`The ${filename}.svg file was optimized successfully`);
       } catch (e) {
-        console.log("执行失败, 请检查名字是否符合规范");
+        console.log(
+          "Failed to execute. Please check if the name conforms to the specification"
+        );
         process.exit(1);
       }
     }
   });
 }
 
-optimizeSvg().then(() => console.log("执行结束"));
+optimizeSvg().then(() => console.log("Optimize the end."));

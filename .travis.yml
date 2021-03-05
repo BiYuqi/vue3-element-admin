@@ -4,7 +4,6 @@ node_js:
 
 install:
   - yarn install
-  - yarn run test:unit
   - yarn run build:prod
 
 after_script:

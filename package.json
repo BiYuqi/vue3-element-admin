@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --mode staging",
     "build:stage": "vue-cli-service build --mode staging",
     "build:prod": "vue-cli-service build --mode prod",
-    "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "svgo:pick": "ts-node --project tsconfig.svgo.json ./scripts/svgo.ts",
     "svgo": "svgo -f src/icons/svg"

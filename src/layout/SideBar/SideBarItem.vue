@@ -1,23 +1,28 @@
 <template>
   <div v-if="!isHidden(item)">
-    <template v-if="!isNested(item)">
-      <router-link :to="handleResolvePath(item)" class="sidebar-link">
+    <template
+      v-if="
+        hasOneShowingChild(item.children, item) &&
+          (!onlyOneChild.children || onlyOneChild.noShowingChildren)
+      "
+    >
+      <sidebar-link :to="resolvePath(onlyOneChild.path)" class="sidebar-link">
         <el-menu-item
-          :index="handleResolvePath(item)"
+          :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
         >
           <svg-icon
             v-if="hasIcon(item)"
-            :icon-class="pickDisplayData(item).icon"
+            :icon-class="getDisplayInfo(item).icon"
           />
           <template #title>
-            <span>{{ pickDisplayData(item).title }}</span>
+            <span>{{ getDisplayInfo(item).title }}</span>
           </template>
         </el-menu-item>
-      </router-link>
+      </sidebar-link>
     </template>
 
-    <el-submenu v-else :index="handleResolvePath(item)">
+    <el-submenu v-else :index="resolvePath(item.path)">
       <template #title>
         <svg-icon v-if="hasIcon(item)" :icon-class="item.meta.icon" />
         <span>{{ item.meta.title }}</span>
@@ -26,20 +31,25 @@
         v-for="child in item.children"
         :is-nest="true"
         :item="child"
-        :key="child.name"
+        :key="child.path"
+        :base-path="resolvePath(child.path)"
       />
     </el-submenu>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from "vue";
+import * as path from "path";
+import { defineComponent, toRefs, ref } from "vue";
 import { RouteRecordRaw } from "vue-router";
-import { treePath } from "@ifake/tree-path";
-import { sideBarRoutes } from "@/router/routes";
+import { isExternal } from "@/utils/validate";
+import SidebarLink from "./Link.vue";
 
 export default defineComponent({
   name: "SidebarItem",
+  components: {
+    SidebarLink
+  },
   props: {
     item: {
       type: Object,
@@ -48,17 +58,21 @@ export default defineComponent({
     isNest: {
       type: Boolean,
       default: false
+    },
+    basePath: {
+      type: String,
+      default: ""
     }
   },
   setup(props) {
-    // the single route of the root
-    const onlyOneRoute = (item: RouteRecordRaw): boolean => {
+    // The single route of the root
+    const isSingleRoute = (item: RouteRecordRaw): boolean => {
       return !!(item?.children && item?.children.length === 1);
     };
 
-    // Verify whether there are nested routes. exclude `onlyOneRoute
+    // Verify whether there are nested routes. exclude `isSingleRoute`
     const isNested = (item: RouteRecordRaw) => {
-      if (onlyOneRoute(item)) {
+      if (isSingleRoute(item)) {
         return false;
       }
       return !!item?.children;
@@ -68,15 +82,45 @@ export default defineComponent({
       return item.meta && item.meta?.hidden;
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hasIcon = (item: RouteRecordRaw) => {
       return (
         !!item.meta?.icon || (item?.children && item?.children[0]?.meta?.icon)
       );
     };
 
+    const onlyOneChild = ref<RouteRecordRaw>();
+    const hasOneShowingChild = (
+      children: RouteRecordRaw[] = [],
+      parent: RouteRecordRaw
+    ) => {
+      const showingChildren = children.filter(item => {
+        if (item?.meta?.hidden) {
+          return false;
+        } else {
+          // Temp set(will be used if only has one showing child)
+          onlyOneChild.value = item;
+          return true;
+        }
+      });
+
+      // When there is only one child router, the child router is displayed by default
+      if (showingChildren.length === 1) {
+        return true;
+      }
+
+      // Show parent if there are no child router to display
+      if (showingChildren.length === 0) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        onlyOneChild.value = { ...parent, path: "", noShowingChildren: true };
+        return true;
+      }
+
+      return false;
+    };
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const pickDisplayData = (item: any) => {
+    const getDisplayInfo = (item: any) => {
       if (!isNested(item)) {
         const meta = item.meta || item.children[0].meta;
         if (meta?.icon) {
@@ -91,33 +135,24 @@ export default defineComponent({
       }
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleResolvePath = (item: any) => {
-      if (onlyOneRoute(item)) {
-        const isIndex = item.children[0].path === "index";
-        return isIndex
-          ? `/${item.children[0].name}/index`
-          : `/${item.children[0].name}`;
+    const resolvePath = (routePath: string) => {
+      if (isExternal(routePath)) {
+        return routePath;
       }
-      const handleRoutePath = treePath({
-        tree: sideBarRoutes,
-        breakCondition: route => route.name === item.name
-      });
-      const tree = handleRoutePath
-        .reduce((res, target) => {
-          res.push(target.name);
-          return res;
-        }, [])
-        .join("/");
-      return `/${tree}`;
+      if (isExternal(props.basePath)) {
+        return props.basePath;
+      }
+      return path.resolve(props.basePath, routePath);
     };
 
     return {
       isNested,
       isHidden,
       hasIcon,
-      pickDisplayData,
-      handleResolvePath,
+      getDisplayInfo,
+      resolvePath,
+      hasOneShowingChild,
+      onlyOneChild,
       ...toRefs(props)
     };
   }

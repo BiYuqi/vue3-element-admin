@@ -9,7 +9,12 @@
       :text-color="darkTextColor"
       :active-text-color="darkActiveColor"
     >
-      <sidebar-item v-for="route in routes" :item="route" :key="route.name" />
+      <sidebar-item
+        v-for="route in routes"
+        :item="route"
+        :key="route.name"
+        :base-path="route.path"
+      />
     </el-menu>
   </div>
 </template>

@@ -10,7 +10,7 @@ const request: AxiosInstance = axios.create({
 });
 
 /**
- * 注册请求响应拦截
+ * Request interceptor
  */
 export function interceptors(service: AxiosInstance) {
   service.interceptors.request.use(
@@ -54,7 +54,4 @@ export function interceptors(service: AxiosInstance) {
 
 interceptors(request);
 
-/**
- * 导出
- */
 export { request };

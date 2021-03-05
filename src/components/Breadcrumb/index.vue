@@ -21,7 +21,7 @@ export default defineComponent({
     const breadcrumb = ref<string[]>([]);
     const route = useRoute();
 
-    const handleResolvePath = () => {
+    const handleRoutePath = () => {
       const handleRoutePath = treePath({
         tree: routes,
         breakCondition: r => r.name === route.name
@@ -38,7 +38,7 @@ export default defineComponent({
       }
       breadcrumb.value = [...getFinalRouteName];
     };
-    watchEffect(handleResolvePath);
+    watchEffect(handleRoutePath);
 
     return {
       breadcrumb

@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - '14'
+
+install:
+  - yarn install
+  - yarn run build:prod
+
+after_script:
+  - cd ./dist
+  - git init
+  - git config user.name "BiYuqi"
+  - git config user.email "biyuqiwan@163.com"
+  - git add .
+  - git commit -m "Travis CI Auto Builder at `date +"%Y-%m-%d %H:%M"`"
+  - git push --force --quiet "https://${VUE3_ADMIN}@${GH_REF}" master:gh-pages
+
+branches:
+  only:
+    - master
+env:
+  global:
+    - GH_REF: github.com/BiYuqi/vue3-element-admin.git

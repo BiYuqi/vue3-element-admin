@@ -11,7 +11,7 @@
         </el-dropdown-item>
         <el-dropdown-item command="github">
           <el-link
-            href="https://github.com/ifakejs/vue3-element-admin"
+            href="https://github.com/BiYuqi/vue3-element-admin"
             target="_blank"
             :underline="false"
             >Github</el-link

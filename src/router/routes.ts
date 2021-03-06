@@ -102,7 +102,7 @@ export const sideBarRoutes: RouteRecordRaw[] = [
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore For external link we don't need the component, skip the type check.
       {
-        path: "https://github.com/ifakejs/vue3-element-admin",
+        path: "https://github.com/BiYuqi/vue3-element-admin",
         meta: { title: "Github", icon: "link" }
       }
     ]

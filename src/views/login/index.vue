@@ -61,6 +61,10 @@ interface FormModel {
   password: string;
 }
 
+type FormRules<T> = {
+  [P in keyof T]: unknown;
+};
+
 export default defineComponent({
   setup() {
     const router = useRouter();
@@ -71,10 +75,11 @@ export default defineComponent({
       userName: "admin",
       password: "123456"
     });
-    const formRules = reactive<Record<string, unknown>>({
+    const formRules = reactive<FormRules<FormModel>>({
       userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
       password: [{ required: true, message: "请输入密码", trigger: "blur" }]
     });
+
     const toggleLoading = (status: boolean) => {
       loading.value = status;
     };
@@ -83,6 +88,7 @@ export default defineComponent({
       (loginFormRef.value as any).validate(async (valid: ValidateSource) => {
         if (valid) {
           toggleLoading(true);
+          // mock the real login
           await sleep(2000);
           setToken("__fake__");
 
@@ -96,6 +102,7 @@ export default defineComponent({
       });
     };
 
+    // here is the logic of control password show or not
     const { pswType, iconName, handleClickEye } = usePswEys();
 
     return {

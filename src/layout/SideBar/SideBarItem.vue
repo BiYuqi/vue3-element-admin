@@ -118,7 +118,7 @@ export default defineComponent({
 
       return false;
     };
-
+    // TODO resolve type problem
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getDisplayInfo = (item: any) => {
       if (!isNested(item)) {

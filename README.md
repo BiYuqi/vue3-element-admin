@@ -28,7 +28,7 @@ yarn run build:prod
 
 ### Run your unit tests
 ```
-yarn test:unit
+yarn test
 ```
 
 ### Lints and fixes files

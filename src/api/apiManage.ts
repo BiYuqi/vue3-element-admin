@@ -1,12 +1,13 @@
 import { useRequest } from "@/composable/useRequest";
 
 /**
- * 用户登录
+ * If we want to request a backend API, maybe we can do that
  */
-export function userLogin(params = {}) {
+export function userLogin(params = {}, manual = false) {
   return useRequest({
     url: "/user/login",
     method: "GET",
-    params
+    params,
+    manual
   });
 }

@@ -37,7 +37,6 @@ type Commands = "home" | "github" | "doc" | "logout";
 
 enum CommandsValue {
   HOME = "home",
-  GITHUB = "home",
   DOC = "doc",
   LOGOUT = "logout"
 }

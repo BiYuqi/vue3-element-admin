@@ -4,8 +4,7 @@ export interface State {
   sideBarIsOpen: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const app: Module<State, any> = {
+export const app: Module<State, unknown> = {
   namespaced: true,
   state: {
     sideBarIsOpen: false

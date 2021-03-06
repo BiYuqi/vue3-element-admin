@@ -2,7 +2,22 @@ import { isRef, reactive, toRefs, ToRefs } from "vue";
 import { Method } from "axios";
 import { request } from "@/api/request";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ *  It accepts the following parameters:
+ *  @param url {string} The backend api address.
+ *  @param params {any} The request data.
+ *  @param manual {boolean} Automate the request or not. Default: false
+ *  @param method {string} Method of request.
+ */
+
+/**
+ *  The base request and always return below:
+ *  @return result {vue ref}
+ *  @return loading {vue ref}
+ *  @return error {vue ref}
+ *  @return run {Function} We can do it manually
+ */
+
 interface UseRequest {
   url: string;
   params?: any;
@@ -16,13 +31,13 @@ interface UseRequestParam {
   error: Error | null;
 }
 
-interface Run {
+interface RunCb {
   run: () => Promise<void>;
 }
 
-type UseRequestReturn = ToRefs<UseRequestParam> & Run;
+type UseRequestReturn = ToRefs<UseRequestParam> & RunCb;
 
-function ensureRefToValue(params: Record<string, any>) {
+function ensureRefToValue(params: Record<string, unknown>) {
   const result = {
     ...params
   };

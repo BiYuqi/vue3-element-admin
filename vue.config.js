@@ -1,11 +1,12 @@
 const path = require("path");
 const resolve = p => path.resolve(__dirname, p);
+const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
-  publicPath: "/",
+  publicPath: isProd ? process.env.VUE_APP_DEMO_PATH : "/",
   outputDir: "dist",
   assetsDir: "static",
-  lintOnSave: process.env.NODE_ENV === "development",
+  lintOnSave: !isProd,
   productionSourceMap: false,
   configureWebpack: {
     resolve: {

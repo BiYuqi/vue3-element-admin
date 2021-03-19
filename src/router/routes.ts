@@ -67,7 +67,7 @@ export const sideBarRoutes: RouteRecordRaw[] = [
             component: () => import("@/views/nested/menu2/menu2-1/index.vue"),
             meta: {
               title: "Menu2-1"
-              // When hidden is set to true, the sidebar will not be displayed
+              // When hidden is set to true, this menu will not be display
               // hidden: true
             }
           },

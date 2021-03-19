@@ -4,7 +4,7 @@ node_js:
 
 install:
   - yarn install
-  - yarn run build:prod
+  - yarn run build:demo
 
 after_script:
   - cd ./dist

@@ -3,14 +3,14 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-// import element-plus ui library
+/** element-plus ui */
 import ElementPlus from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
 
-/** Load svg icon */
+/** load svg */
 import "@/icons/index";
 
-/** Load custom component */
+/** load custom component */
 import VComponents from "./components/index";
 
 createApp(App)

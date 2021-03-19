@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0ba199"],{3688:function(n,e,u){"use strict";function c(n,e){return"menu2-1"}u.r(e);const o={};o.render=c;e["default"]=o}}]);

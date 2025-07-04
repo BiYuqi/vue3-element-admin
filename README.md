@@ -1,4 +1,4 @@
-# vue3-element-admin
+# vue3-element-admin()
 
 A simple admin system based on element-plus & vue3.x. Using Typescript and Composition API.
 
